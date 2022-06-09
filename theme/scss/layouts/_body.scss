@@ -1,4 +1,8 @@
-.body{
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     background-image: linear-gradient(to right, red, purple); 
     height: 100vh;
+    overflow: hidden;
 }
