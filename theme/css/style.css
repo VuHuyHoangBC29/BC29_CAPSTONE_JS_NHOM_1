@@ -1,0 +1,53 @@
+.body {
+  background-image: -webkit-gradient(linear, left top, right top, from(red), to(purple));
+  background-image: linear-gradient(to right, red, purple);
+  height: 100vh;
+}
+
+#card {
+  background-color: rgba(255, 0, 0, 0);
+  border: none;
+  margin: 50px 0;
+}
+
+#card .card_item {
+  padding: 30px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+#card .card_item .card {
+  border-radius: 30px;
+  background-color: black;
+}
+
+#card .card_item .card .icon {
+  color: white;
+}
+
+#card .card_item .card .icon span {
+  font-style: italic;
+  color: green;
+}
+
+#card .card_item .card .card-body {
+  background-color: #2e2f33;
+  color: white;
+  border-radius: 30px;
+  margin-top: 10px;
+}
+
+#card .card_item .card .card-body .content {
+  display: none;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+#card .card_item:hover {
+  padding: 0;
+}
+
+#card .card_item:hover .card-body .content {
+  display: block;
+}
+/*# sourceMappingURL=style.css.map */
