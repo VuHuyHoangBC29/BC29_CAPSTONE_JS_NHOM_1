@@ -61,9 +61,7 @@
         </div>
       </nav>
 
-      <header class="display-4 my-4">
-        Dự án quản lý sản phẩm
-      </header>
+      <header class="display-4 my-4">Dự án quản lý sản phẩm</header>
       <!-- Phan tab menu -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
@@ -99,7 +97,7 @@
             <div class="col-md-8">
               <!-- BEGIN BUTTOM THÊM MỚI -->
               <button
-                id="btnThemNguoiDung"
+                id="btnThemSanPham"
                 class="btn btn-success"
                 data-toggle="modal"
                 data-target="#myModal"
@@ -116,7 +114,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Nhập từ khóa"
-                  aria-label="Recipient's username"
+                  aria-label="Product's name"
                   aria-describedby="basic-addon2"
                 />
                 <div class="input-group-append">
@@ -183,7 +181,7 @@
                   class="form-control"
                   placeholder="Nhập tên sản phẩm"
                 />
-                <span class="thongBao" id="tbSP"></span>
+                <span class="thongBao" id="tbTenSP"></span>
               </div>
               <div class="form-group">
                 <label>Giá</label>
@@ -192,7 +190,7 @@
                   class="form-control"
                   placeholder="Nhập giá sản phẩm"
                 />
-                <span class="thongBao" id="tbGia"></span>
+                <span class="thongBao" id="tbGiaSP"></span>
               </div>
               <div class="form-group">
                 <label>Màn hình</label>
@@ -200,7 +198,6 @@
                   id="manHinh"
                   class="form-control"
                   placeholder="Nhập thông số màn hình"
-                  type="password"
                 />
                 <span class="thongBao" id="tbManHinh"></span>
               </div>
@@ -238,14 +235,14 @@
                   class="form-control"
                   placeholder="Nhập mô tả"
                 />
-                <span class="thongBao" id="tbMota"></span>
+                <span class="thongBao" id="tbMoTa"></span>
               </div>
               <div class="form-group">
                 <label for="">Loại: </label>
-                <select class="form-control" id="loaiSanPham">
+                <select class="form-control" id="loaiSP">
                   <option>Chọn loại sản phẩm</option>
-                  <option value="IP">Iphone</option>
-                  <option value="SS">Samsung</option>
+                  <option>Iphone</option>
+                  <option>Samsung</option>
                 </select>
                 <span class="thongBao" id="tbLoaiSP"></span>
               </div>
@@ -292,9 +289,9 @@
       referrerpolicy="no-referrer"
     ></script>
 
-    <script src="./../models/QLSP.js"></script>
-    <script src="./../services/index.js"></script>
-    <script src="./../models/validation.js"></script>
-    <script src="./../controllers/main.js"></script>
+    <script src="../models/QLSP.js"></script>
+    <script src="../services/index.js"></script>
+    <script src="../models/validation.js"></script>
+    <script src="../controllers/main.js"></script>
   </body>
 </html>
