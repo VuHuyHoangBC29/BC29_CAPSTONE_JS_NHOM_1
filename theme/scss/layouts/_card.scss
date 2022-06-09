@@ -1,7 +1,7 @@
 #card {
     background-color: rgba(255, 0, 0, 0);
     border: none;
-    margin: 50px 0;
+    margin-top: 100px;
     .card_item {
         padding: 30px;
         transition: all 0.5s;
@@ -28,6 +28,11 @@
                 .content {
                     display: none;
                     transition: all 1s;
+                }
+
+                button{
+                    border: 1px solid white;
+                    border-radius: 30px;
                 }
             }
 

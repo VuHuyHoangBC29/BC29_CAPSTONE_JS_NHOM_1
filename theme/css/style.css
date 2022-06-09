@@ -1,13 +1,18 @@
-.body {
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background-image: -webkit-gradient(linear, left top, right top, from(red), to(purple));
   background-image: linear-gradient(to right, red, purple);
   height: 100vh;
+  overflow: hidden;
 }
 
 #card {
   background-color: rgba(255, 0, 0, 0);
   border: none;
-  margin: 50px 0;
+  margin-top: 100px;
 }
 
 #card .card_item {
@@ -43,11 +48,113 @@
   transition: all 1s;
 }
 
+#card .card_item .card .card-body button {
+  border: 1px solid white;
+  border-radius: 30px;
+}
+
 #card .card_item:hover {
   padding: 0;
 }
 
 #card .card_item:hover .card-body .content {
   display: block;
+}
+
+.shop #counter {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border-radius: 50%;
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.shop i {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.shop i:hover {
+  color: white;
+}
+
+#cart {
+  position: absolute;
+  width: 60%;
+  top: 0;
+  right: 0;
+  background-color: black;
+  color: white;
+  display: none;
+  -webkit-box-shadow: 1px 1px 20px 20px rgba(0, 0, 0, 0.425);
+          box-shadow: 1px 1px 20px 20px rgba(0, 0, 0, 0.425);
+}
+
+#cart .cart_content {
+  position: relative;
+  height: 100vh;
+  padding: 30px;
+}
+
+#cart .cart_content .cart_header i {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+}
+
+#cart .cart_content .cart_item ul li::after {
+  content: "";
+  margin: 5px 0;
+  background-color: white;
+  width: 100%;
+  height: 1px;
+}
+
+#cart .cart_content .cart_item ul .icon i {
+  border-radius: 50%;
+  border: 1px solid white;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+#cart .cart_content .tb_cart {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  text-align: center;
+  font-size: 50px;
+  color: gray;
+}
+
+#cart .cart_content .pay_price {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
+
+#cart .cart_content .pay_price button {
+  margin: 10px;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+#cart .cart_content .pay_price button:hover {
+  background-color: white;
+  color: black;
 }
 /*# sourceMappingURL=style.css.map */
