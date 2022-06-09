@@ -17,6 +17,6 @@ function Product(
     this.frontCamera = _frontCamera;
     this.img = _img;
     this.desc = _desc;
-    this._type = _type;
+    this.type = _type;
   }
   
