@@ -13,6 +13,7 @@ function getProductList() {
       console.log(result);
       renderProductList(result.data);
       danhSachSP = result.data;
+      console.log(danhSachSP);
     })
     .catch(function (error) {
       console.log(error);
@@ -69,6 +70,8 @@ function defaultStatus() {
   getEle("tbHinhAnh").innerHTML = "";
   getEle("tbMoTa").innerHTML = "";
   getEle("tbLoaiSP").innerHTML = "";
+
+  getEle("tenSP").disabled = false;
 }
 
 /**
@@ -242,3 +245,124 @@ function editProduct(id) {
 
   getEle("tenSP").disabled = true;
 }
+
+/**
+ * Cập nhật sản phẩm
+ */
+function updateProduct(id) {
+  var tenSP = getEle("tenSP").value;
+  var giaSP = getEle("giaSP").value;
+  var manHinh = getEle("manHinh").value;
+  var camSau = getEle("camSau").value;
+  var camTruoc = getEle("camTruoc").value;
+  var hinhAnh = getEle("hinhAnh").value;
+  var moTa = getEle("moTa").value;
+  var loaiSP = getEle("loaiSP").value;
+
+  var isValid = true;
+  //giaSp
+  isValid &=
+    validation.kiemTraRong(giaSP, "tbGiaSP", "Vui lòng nhập giá sản phẩm") &&
+    validation.kiemTraGia(
+      giaSP,
+      "tbGiaSP",
+      1000000,
+      50000000,
+      "Vui lòng nhập giá hợp lệ"
+    );
+
+  //manHinh
+  isValid &= validation.kiemTraRong(
+    manHinh,
+    "tbManHinh",
+    "Vui lòng nhập thông số màn hình"
+  );
+
+  //camSau
+  isValid &= validation.kiemTraRong(
+    camSau,
+    "tbCamSau",
+    "Vui lòng nhập thông số camera sau"
+  );
+
+  //camTruoc
+  isValid &= validation.kiemTraRong(
+    camTruoc,
+    "tbCamTruoc",
+    "Vui lòng nhập thông số camera trước"
+  );
+
+  //hinhAnh
+  isValid &= validation.kiemTraRong(
+    hinhAnh,
+    "tbHinhAnh",
+    "Vui lòng nhập hình ảnh"
+  );
+
+  //moTa
+  isValid &=
+    validation.kiemTraRong(moTa, "tbMoTa", "Vui lòng nhập mô tả") &&
+    validation.kiemTraDoDaiKiTu(
+      moTa,
+      "tbMoTa",
+      20,
+      200,
+      "Mô tả phải dài hơn 20 và ít hơn 200 kí tự"
+    );
+
+  //loaiSP
+  isValid &= validation.kiemTraChon(
+    "loaiSP",
+    "tbLoaiSP",
+    "Vui lòng chọn loại sản phẩm"
+  );
+
+  if (!isValid) return;
+
+  var product = new Product(
+    id,
+    tenSP,
+    giaSP,
+    manHinh,
+    camSau,
+    camTruoc,
+    hinhAnh,
+    moTa,
+    loaiSP
+  );
+
+  service
+    .updateProductApi(product)
+    .then(function () {
+      getProductList();
+      document.getElementsByClassName("close")[0].click();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+/**
+ * Tìm kiếm sản phẩm
+ */
+// getEle("keyword").addEventListener("keyup", function () {
+//   var keyword = getEle("keyword").value;
+//   var mangTimKiem = [];
+//   danhSachSP.forEach(function (item) {
+//     if (item.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
+//       mangTimKiem.push(item);
+//     }
+//   });
+//   renderProductList(mangTimKiem);
+// });
+
+getEle("searchButton").onclick = function () {
+  var keyword = getEle("keyword").value;
+  var mangTimKiem = [];
+  danhSachSP.forEach(function (item) {
+    if (item.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
+      mangTimKiem.push(item);
+    }
+  });
+  renderProductList(mangTimKiem);
+};
