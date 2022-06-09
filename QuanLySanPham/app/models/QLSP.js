@@ -1,22 +1,22 @@
 function Product(
     _id,
-    _tenSP,
-    _giaSP,
-    _manHinh,
-    _camSau,
-    _camTruoc,
-    _hinhAnh,
-    _moTa,
-    _loaiSP
+    _name,
+    _price,
+    _screen,
+    _backCamera,
+    _frontCamera,
+    _img,
+    _desc,
+    _type
   ) {
     this.id = _id;
-    this.taiKhoan = _tenSP;
-    this.giaSP = _giaSP;
-    this.manHinh = _manHinh;
-    this.camSau= _camSau;
-    this.camTruoc = _camTruoc;
-    this.hinhAnh = _hinhAnh;
-    this.moTa = _moTa;
-    this._loaiSP = _loaiSP;
+    this.name = _name;
+    this.price = _price;
+    this.screen = _screen;
+    this.backCamera = _backCamera;
+    this.frontCamera = _frontCamera;
+    this.img = _img;
+    this.desc = _desc;
+    this._type = _type;
   }
   
