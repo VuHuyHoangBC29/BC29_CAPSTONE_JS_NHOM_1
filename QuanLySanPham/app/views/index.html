@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Quản lý người dùng</title>
+    <title>Quản lý sản phẩm</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -62,20 +62,20 @@
       </nav>
 
       <header class="display-4 my-4">
-        Thực hành javascript - axios với dự án quản lý trung tâm
+        Dự án quản lý sản phẩm
       </header>
       <!-- Phan tab menu -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
           <a
             class="nav-link active"
-            href="#DanhSachNguoiDung"
+            href="#DanhSachSP"
             role="tab"
             data-toggle="tab"
-            >Danh sách người dùng</a
+            >Danh sách sản phẩm</a
           >
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a
             class="nav-link"
             href="#DanhSachKhoaHoc"
@@ -83,7 +83,7 @@
             data-toggle="tab"
             >Danh sách khóa học</a
           >
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="#ThongKe" role="tab" data-toggle="tab"
             >Thống kê</a
@@ -94,7 +94,7 @@
       <!-- Tab panes -->
       <div class="tab-content">
         <!--Danh sách người dùng -->
-        <div role="tabpanel" class="tab-pane in active" id="DanhSachNguoiDung">
+        <div role="tabpanel" class="tab-pane in active" id="DanhSachSP">
           <div class="row">
             <div class="col-md-8">
               <!-- BEGIN BUTTOM THÊM MỚI -->
@@ -142,7 +142,7 @@
                 <th>Mô tả</th>
                 <th>Loại</th>
               </thead>
-              <tbody id="tblDanhSachNguoiDung"></tbody>
+              <tbody id="tblDanhSachSP"></tbody>
             </table>
             <!-- END TABLE NGƯỜI DÙNG -->
           </div>
@@ -223,6 +223,15 @@
                 <span class="thongBao" id="tbCamTruoc"></span>
               </div>
               <div class="form-group">
+                <label>Hình ảnh</label>
+                <input
+                  id="hinhAnh"
+                  class="form-control"
+                  placeholder="Nhập hình ảnh"
+                />
+                <span class="thongBao" id="tbHinhAnh"></span>
+              </div>
+              <div class="form-group">
                 <label>Mô tả</label>
                 <input
                   id="moTa"
@@ -283,9 +292,9 @@
       referrerpolicy="no-referrer"
     ></script>
 
-    <script src="./../models/QLTT.js"></script>
+    <script src="./../models/QLSP.js"></script>
     <script src="./../services/index.js"></script>
-    <script src="./../models/validations.js"></script>
+    <script src="./../models/validation.js"></script>
     <script src="./../controllers/main.js"></script>
   </body>
 </html>
