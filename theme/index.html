@@ -19,6 +19,11 @@
 <body>
     <div class="shop p-3">
         <!-- <div class="col-11"></div> -->
+        <select name="" id="selectPhone">
+            <option value="">Chọn loại điện thoại</option>
+            <option value="iphone">Iphone</option>
+            <option value="samsung">Samsung</option>
+        </select>
         <i id="shopping" class="fa-solid fa-cart-shopping fa-3x">
         </i>
         <span id="counter">0</span>
@@ -38,8 +43,8 @@
                 <i id="close" class="fa-solid fa-x"></i>
             </div>
             <div class="cart_item">
-                <ul>
-                    <li class="row d-flex align-items-center">
+                <ul id="listCart">
+                    <!-- <li class="row d-flex align-items-center">
                         <div class="col-3">
                             <img id="itemImg"
                                 src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
@@ -59,11 +64,11 @@
                         <div class="col-1">
                             <i class="fa-solid fa-trash"></i>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="tb_cart">
-                <p>Looks Like You Haven't Added Any Product In The Cart</p>
+                <p id="tbCart">Looks Like You Haven't Added Any Product In The Cart</p>
             </div>
             <div class="pay_price">
                 <span>Total: </span>
@@ -86,9 +91,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js" integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./src/models/listProduct.js"></script>
-        <script src="./src/models/product.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+        integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./src/models/cart.js"></script>
+    <script src="./src/models/listProduct.js"></script>
+    <script src="./src/models/product.js"></script>
     <script src="./src/services/index.js"></script>
     <script src="./src/controllers/main.js"></script>
 </body>

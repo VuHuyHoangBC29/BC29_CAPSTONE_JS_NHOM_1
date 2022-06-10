@@ -6,7 +6,6 @@ body {
   background-image: -webkit-gradient(linear, left top, right top, from(red), to(purple));
   background-image: linear-gradient(to right, red, purple);
   height: 100vh;
-  overflow: hidden;
 }
 
 #card {
@@ -84,6 +83,14 @@ body {
 
 .shop i:hover {
   color: white;
+}
+
+.shop #selectPhone {
+  background-color: black;
+  padding: 5px 15px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
 }
 
 #cart {

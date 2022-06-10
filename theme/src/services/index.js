@@ -1,7 +1,7 @@
 class Services{
     getProductApi(){
         return axios({
-            url: "https://628b995a7886bbbb37bbca17.mockapi.io/api/phone",
+            url: "https://628b995f667aea3a3e32d1a4.mockapi.io/api/ProductsCapstone",
             method: "GET"
         })
     }
