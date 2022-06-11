@@ -45,7 +45,7 @@ const renderProduct = (data) => {
                 <div class="icon d-flex justify-content-between p-3">${icon}</i>
                     <span>In Stock</span>
                 </div>
-                <img class="card-img-top mx-auto"
+                <img class="card-img-top mx-auto mt-4 mb-5"
                     src="${item.img}"
                     alt="Card image" style="width:70%">
                 <div class="card-body">
@@ -63,8 +63,8 @@ const renderProduct = (data) => {
                             </ul>
                         </div>
                         <div class="product_price d-flex justify-content-between align-items-center">
-                            <span>$ ${item.price}</span>
-                            <button class="btn text-light" onclick="ThemSP(${item.id})">Add <i
+                            <span>${item.price} VNĐ</span>
+                            <button class="btn" onclick="ThemSP(${item.id})">Add <i
                                     class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
