@@ -62,7 +62,7 @@ const renderProduct = (data) => {
                             </ul>
                         </div>
                         <div class="product_price d-flex justify-content-between align-items-center">
-                            <span>$ ${item.price}</span>
+                            <span>$ ${item.price} VNĐ</span>
                             <button class="btn text-light" onclick="ThemSP('${item.id}')">Add <i
                                     class="fa-solid fa-chevron-right"></i></button>
                         </div>
