@@ -1,7 +1,5 @@
 class ListProduct{
-    arr = [];
+    list = [];
 
-    addList(){
-        
-    }
+    
 }
