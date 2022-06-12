@@ -5,7 +5,7 @@
         "../scss/style.scss",
         "../scss/layouts/_body.scss",
         "../scss/layouts/_card.scss",
-        "../scss/button/_button.scss",
+        "../scss/component/_button.scss",
         "../scss/layouts/_shop.scss",
         "../scss/layouts/_cart.scss"
     ],
