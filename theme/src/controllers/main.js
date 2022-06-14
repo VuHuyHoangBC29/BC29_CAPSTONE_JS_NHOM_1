@@ -8,14 +8,6 @@ const getEle = (id) => {
   return document.getElementById(id);
 };
 
-getEle("shopping").onclick = function () {
-  getEle("cart").style.display = "block";
-};
-
-getEle("close").onclick = function () {
-  getEle("cart").style.display = "none";
-};
-
 const getListProduct = () => {
   const promise = services.getProductListApi();
   promise
@@ -82,36 +74,6 @@ const renderProduct = (data) => {
   getEle("card_product").innerHTML = content;
 };
 
-getEle("selectPhone").onchange = function () {
-  const filter = getEle("selectPhone").value;
-  let dataApiFilter = [];
-  dataApi.forEach((item, i) => {
-    if (filter === item.type.toLowerCase()) {
-      dataApiFilter.push(item);
-    }
-  });
-  if (filter === "") {
-    renderProduct(dataApi);
-  } else {
-    renderProduct(dataApiFilter);
-  }
-};
-
-// const ThemSP = (id) => {
-//   dataApi.forEach((item) => {
-//     if (item.id === id) {
-//       arrCart.push(item);
-//     }
-//   });
-//   getEle("counter").innerHTML = arrCart.length;
-//   if (arrCart.length > 0) {
-//     getEle("tbCart").style.display = "none";
-//   } else {
-//     getEle("tbCart").style.display = "block";
-//   }
-//   renderListCart(arrCart);
-// };
-
 const getCartItem = (id) => {
   let cartItem = {};
 
@@ -137,8 +99,10 @@ const ThemSP = (id) => {
     cartItem.quantity = 1;
     cartList.push(cartItem);
   }
-  console.log(cartList);
+
   renderListCart(cartList);
+
+  setLocalStorage(cartList);
 };
 
 const renderListCart = (data) => {
@@ -147,7 +111,9 @@ const renderListCart = (data) => {
     content += `
             <li class="row d-flex align-items-center">
                 <div class="col-3">
-                    <img class="item_Img" src="${item.img}" style="width: 30%;" alt="">
+                    <img class="item_Img" src="${
+                      item.img
+                    }" style="width: 30%;" alt="">
                 </div>
                 <div class="col-4">
                     <span class="col-4">${item.name}</span>
@@ -158,13 +124,72 @@ const renderListCart = (data) => {
                     <i class="fa-solid fa-chevron-right"></i>
                 </div>
                 <div class="col-2">
-                    <span>${item.price}</span>
+                    <span class="totalItemPrice">${item.price * item.quantity}</span><span> VNĐ</span>
                 </div>
                 <div class="col-1">
                     <i class="fa-solid fa-trash"></i>
                     </div>
             </li>
-        `;
+        // `;
   });
   getEle("listCart").innerHTML = content;
+
+  let totalItem = 0;
+  cartList.forEach((item, i) => {
+    totalItem += item.quantity;
+  });
+  getEle("counter").innerHTML = totalItem;
+  if (totalItem > 0) {
+    getEle("tbCart").style.display = "none";
+  } else {
+    getEle("tbCart").style.display = "block";
+  }
+
+  let totalPrice = 0;
+  let priceArr = document.querySelectorAll(".totalItemPrice");
+  console.log(priceArr);
+  priceArr.forEach((item) => {
+    let priceArrItemPrice = item.innerHTML*1;
+    totalPrice += priceArrItemPrice;
+    getEle("totalPrice").innerHTML = totalPrice + " VNĐ";
+  })
+};
+
+const setLocalStorage = () => {
+  const dataString = JSON.stringify(cartList);
+  localStorage.setItem("CART_LIST", dataString);
+};
+
+const getLocalStorage = () => {
+  const stringify = localStorage.getItem("CART_LIST");
+  console.log(stringify);
+  cartList = stringify ? JSON.parse(stringify) : [];
+  console.log(cartList);
+
+  renderListCart(cartList);
+};
+
+getLocalStorage();
+
+getEle("shopping").onclick = function () {
+  getEle("cart").style.display = "block";
+};
+
+getEle("close").onclick = function () {
+  getEle("cart").style.display = "none";
+};
+
+getEle("selectPhone").onchange = function () {
+  const filter = getEle("selectPhone").value;
+  let dataApiFilter = [];
+  dataApi.forEach((item, i) => {
+    if (filter === item.type.toLowerCase()) {
+      dataApiFilter.push(item);
+    }
+  });
+  if (filter === "") {
+    renderProduct(dataApi);
+  } else {
+    renderProduct(dataApiFilter);
+  }
 };
