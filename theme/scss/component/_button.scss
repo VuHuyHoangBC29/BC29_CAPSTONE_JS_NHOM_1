@@ -16,3 +16,31 @@
     }
   }
 }
+
+#cart {
+  .cart_content {
+    .cart_item {
+      #listCart {
+        button {
+          background-color: transparent;
+
+          i {
+            border-radius: 50%;
+            border: 1px solid white;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s;
+
+            &:hover {
+              color: black;
+              background-color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

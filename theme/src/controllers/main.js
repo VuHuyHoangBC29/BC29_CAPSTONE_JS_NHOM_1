@@ -119,16 +119,24 @@ const renderListCart = (data) => {
                     <span class="col-4">${item.name}</span>
                 </div>
                 <div class="col-2 icon">
-                    <i class="fa-solid fa-chevron-left"></i>
+                    <button id="btnDecreaseQuan" onclick="giamSL('${
+                      item.id
+                    }')"><i class="fa-solid fa-chevron-left"></i></button>
                     <span class="so_luong">${item.quantity}</span>
-                    <i class="fa-solid fa-chevron-right"></i>
+                    <button id="btnIncreaseQuan" onclick="tangSL('${
+                      item.id
+                    }')"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
                 <div class="col-2">
-                    <span class="totalItemPrice">${item.price * item.quantity}</span><span> VNĐ</span>
+                    <span class="totalItemPrice">${
+                      item.price * item.quantity
+                    }</span><span> VNĐ</span>
                 </div>
                 <div class="col-1">
-                    <i class="fa-solid fa-trash"></i>
-                    </div>
+                    <button id="btnRemoveCartItem" onclick="removeCartItem('${
+                      item.id
+                    }')"><i class="fa-solid fa-trash"></i></button>
+                </div>
             </li>
         // `;
   });
@@ -149,10 +157,14 @@ const renderListCart = (data) => {
   let priceArr = document.querySelectorAll(".totalItemPrice");
   console.log(priceArr);
   priceArr.forEach((item) => {
-    let priceArrItemPrice = item.innerHTML*1;
-    totalPrice += priceArrItemPrice;
+    if (item) {
+      let priceArrItemPrice = item.innerHTML * 1;
+      totalPrice += priceArrItemPrice;
+    } else {
+      totalPrice = 0;
+    }
     getEle("totalPrice").innerHTML = totalPrice + " VNĐ";
-  })
+  });
 };
 
 const setLocalStorage = () => {
@@ -179,6 +191,29 @@ getEle("close").onclick = function () {
   getEle("cart").style.display = "none";
 };
 
+const tangSL = (id) => {
+  cartList.forEach((item) => {
+    if (item.id === id) {
+      item.quantity++;
+    }
+  });
+  renderListCart(cartList);
+};
+
+const giamSL = (id) => {
+  cartList.forEach((item) => {
+    if (item.id === id) {
+      item.quantity--;
+    }
+  });
+  renderListCart(cartList);
+};
+
+const removeCartItem = (id) => {
+  cartList = cartList.filter((ele) => ele.id !== id);
+  renderListCart(cartList);
+};
+
 getEle("selectPhone").onchange = function () {
   const filter = getEle("selectPhone").value;
   let dataApiFilter = [];
@@ -192,4 +227,9 @@ getEle("selectPhone").onchange = function () {
   } else {
     renderProduct(dataApiFilter);
   }
+};
+
+getEle("btnPurchase").onclick = () => {
+  cartList = [];
+  renderListCart(cartList);
 };
