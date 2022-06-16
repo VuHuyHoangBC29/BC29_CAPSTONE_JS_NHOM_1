@@ -1,0 +1,43 @@
+#orderNow {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    .container {
+        color: white;
+        height: 100vh;
+        display: flex;
+
+        .orderNow_content {
+            height: 90%;
+            width: 100%;
+            margin: auto;
+            position: relative;
+            border-radius: 20px;
+            background-color: black;
+            padding: 40px;
+            .btn_group {
+                position: absolute;
+                bottom: 50px;
+                left: 50px;
+            }
+        }
+        .placed {
+            @extend .orderNow_content;
+            width: 30%;
+            height: 70%;
+            display: flex;
+            align-items: center;
+            transition: all 0.5s;
+        }
+        .continue{
+            @extend .placed;
+            width: 50%;
+            height: 20%;
+            flex-direction: column;
+            transition: all 0.5s;
+        }
+    }
+}
