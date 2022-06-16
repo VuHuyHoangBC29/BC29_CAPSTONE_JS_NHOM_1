@@ -3,6 +3,7 @@ let listProduct = new ListProduct();
 let dataApi = [];
 // const cartList = new CartList();
 let cartList = [];
+let totalPrice = 0;
 
 const getEle = (id) => {
   return document.getElementById(id);
@@ -116,14 +117,14 @@ const renderListCart = (data) => {
                     }" style="width: 30%;" alt="">
                 </div>
                 <div class="col-4">
-                    <span class="col-4">${item.ten}</span>
+                    <span class="col-4">${item.name}</span>
                 </div>
                 <div class="col-2 icon">
-                    <button id="btnDecreaseQuan" onclick="giamSL('${
+                    <button onclick="giamSL('${
                       item.id
                     }')"><i class="fa-solid fa-chevron-left"></i></button>
                     <span class="so_luong">${item.quantity}</span>
-                    <button id="btnIncreaseQuan" onclick="tangSL('${
+                    <button onclick="tangSL('${
                       item.id
                     }')"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
@@ -133,14 +134,15 @@ const renderListCart = (data) => {
                     }</span><span> VNĐ</span>
                 </div>
                 <div class="col-1">
-                    <button id="btnRemoveCartItem" onclick="removeCartItem('${
+                    <button onclick="removeCartItem('${
                       item.id
                     }')"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </li>
-        // `;
+         `;
   });
   getEle("listCart").innerHTML = content;
+  console.log(data);
 
   let totalItem = 0;
   cartList.forEach((item, i) => {
@@ -153,18 +155,23 @@ const renderListCart = (data) => {
     getEle("tbCart").style.display = "block";
   }
 
-  let totalPrice = 0;
-  let priceArr = document.querySelectorAll(".totalItemPrice");
-  console.log(priceArr);
-  priceArr.forEach((item) => {
-    if (item) {
-      let priceArrItemPrice = item.innerHTML * 1;
-      totalPrice += priceArrItemPrice;
-    } else {
-      totalPrice = 0;
-    }
-    getEle("totalPrice").innerHTML = totalPrice + " VNĐ";
+  totalPrice = 0;
+  // let priceArr = document.querySelectorAll(".totalItemPrice");
+  // console.log(priceArr);
+  // priceArr.forEach((item) => {
+  //   if (item) {
+  //     let priceArrItemPrice = item.innerHTML * 1;
+  //     totalPrice += priceArrItemPrice;
+  //   } else {
+  //     totalPrice = 0;
+  //   }
+  //   getEle("totalPrice").innerHTML = totalPrice + " VNĐ";
+  // });
+  cartList.forEach((item) => {
+    totalPrice += item.price * item.quantity;
   });
+
+  getEle("totalPrice").innerHTML = totalPrice + " VNĐ";
 };
 
 const setLocalStorage = () => {
@@ -203,7 +210,11 @@ const tangSL = (id) => {
 const giamSL = (id) => {
   cartList.forEach((item) => {
     if (item.id === id) {
-      item.quantity--;
+      if (item.quantity === 1) {
+        removeCartItem(item.id);
+      } else {
+        item.quantity--;
+      }
     }
   });
   renderListCart(cartList);
@@ -212,6 +223,7 @@ const giamSL = (id) => {
 const removeCartItem = (id) => {
   cartList = cartList.filter((ele) => ele.id !== id);
   renderListCart(cartList);
+  setLocalStorage(cartList);
 };
 
 getEle("selectPhone").onchange = function () {
@@ -230,7 +242,88 @@ getEle("selectPhone").onchange = function () {
 };
 
 getEle("btnPurchase").onclick = () => {
+  if (cartList.length > 0) {
+    getEle("orderNow").style.display = "block";
+    renderOrtherPopup(cartList);
+    getEle("cart").style.display = "none";
+  }
+};
+
+//btn Clear
+getEle("btnClear").onclick = () => {
   cartList = [];
   renderListCart(cartList);
   setLocalStorage(cartList);
+};
+
+//render Order_po-pup
+const renderOrtherPopup = (data) => {
+  let content = `
+                <div class="container">
+                  <div class="orderNow_content" id="orderNowContent">
+                    <div id="order_product">
+  `;
+  content += data.reduce((total, ele) => {
+    total += `
+                      <div class="d-flex justify-content-between">
+                        <span>${ele.quantity} x ${ele.name}</span>
+                        <span>${ele.quantity * ele.price} VND</span>
+                      </div>
+                      </br>
+            `;
+    return total;
+  }, "");
+
+  content += `
+                    </div>
+                    <hr class="bg-light">
+                    <p>payment</p>
+                    <div class="d-flex">
+                    <span>Total amount to be paid:</span><span class="ml-auto">${totalPrice} VND</span>
+                    <div>
+                    </br>
+                    <div class="btn_group">
+                      <button onclick="btnOderNow()" class="btn btn-info">Order Now</button>
+                      <button onclick="btnCancleOrder()" class="btn btn-danger">Cancle</button>
+                    </div>
+                  </div>
+                </div>
+  `;
+  getEle("orderNow").innerHTML = content;
+};
+
+const btnCancleOrder = () => {
+  getEle("cart").style.display = "block";
+  getEle("orderNow").style.display = "none";
+};
+
+const btnOderNow = () => {
+  const random = Math.floor(Math.random() * 1000);
+  const content = `
+  <div class="d-flex flex-column">
+    <h3>Your order has been placed</h3>
+    <p>Your order-id is : ${random}</p>
+    <p>Your order will be delivered to you in 3-5 working days</p>
+    <p>You can pay ${totalPrice} VND by card or any online transaction method after the products have been dilivered to you</p>
+    <button onclick="btnOk()" class="btn btn-info form-control">Okay</button>
+  </div>
+  `;
+  getEle("orderNowContent").innerHTML = content;
+  getEle("orderNowContent").className = "placed";
+};
+
+const btnOk = () => {
+  const content = `
+  <h2>Thanks for shopping with us</h2>
+  <button onclick="btnContinue()" class="btn btn-info form-control">continue</button>
+  `;
+  getEle("orderNowContent").innerHTML = content;
+  getEle("orderNowContent").className = "continue";
+  cartList = [];
+  renderListCart(cartList);
+  setLocalStorage(cartList);
+};
+
+const btnContinue = () => {
+  getEle("orderNow").style.display = "none";
 };
