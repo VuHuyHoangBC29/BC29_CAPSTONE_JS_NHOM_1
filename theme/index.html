@@ -1,104 +1,92 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/style.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 
 <body>
-    <div class="shop p-3">
-        <!-- <div class="col-11"></div> -->
-        <select name="" id="selectPhone">
-            <option value="">Chọn loại điện thoại</option>
-            <option value="iphone">Iphone</option>
-            <option value="samsung">Samsung</option>
-        </select>
-        <i id="shopping" class="fa-solid fa-cart-shopping fa-3x">
-        </i>
-        <span id="counter">0</span>
-    </div>
+  <div class="shop p-3">
+    <select name="" id="selectPhone">
+      <option value="">Chọn loại điện thoại</option>
+      <option value="iphone">Iphone</option>
+      <option value="samsung">Samsung</option>
+    </select>
+    <i id="shopping" class="fa-solid fa-cart-shopping fa-3x"> </i>
+    <span id="counter">0</span>
+  </div>
 
-    <div id="card">
-        <div class="container">
-            <div id="card_product" class="row">
-            </div>
+  <div id="cardList">
+    <div class="container">
+      <div id="card_product" class="row"></div>
+    </div>
+  </div>
+
+  <div id="cart">
+    <div class="cart_content">
+      <div class="cart_header d-flex align-items-center justify-content-center">
+        <h1>Cart</h1>
+        <i id="close" class="fa-solid fa-x"></i>
+      </div>
+      <div class="cart_item">
+        <ul id="listCart">
+
+        </ul>
+      </div>
+      <div class="tb_cart">
+        <p id="tbCart">
+          Looks Like You Haven't Added Any Product In The Cart
+        </p>
+      </div>
+      <div class="pay_price">
+        <span>Total: <span id="totalPrice"></span></span>
+        <div class="d-flex">
+          <button id="btnPurchase" class="btn">
+            Purchase <i class="fa-solid fa-credit-card text-primary"></i>
+          </button>
+          <button id="btnClear" class="btn">
+            Clear Cart <i class="fa-solid fa-trash text-danger"></i>
+          </button>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div id="cart">
-        <div class="cart_content">
-            <div class="cart_header d-flex align-items-center justify-content-center">
-                <h1>Cart</h1>
-                <i id="close" class="fa-solid fa-x"></i>
-            </div>
-            <div class="cart_item">
-                <ul id="listCart">
-                    <!-- <li class="row d-flex align-items-center">
-                        <div class="col-3">
-                            <img id="itemImg"
-                                src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
-                                style="width: 30%;" alt="">
-                        </div>
-                        <div class="col-3">
-                            <span id="cartName" class="col-4">Iphone X</span>
-                        </div>
-                        <div class="col-2 icon">
-                            <i class="fa-solid fa-chevron-left"></i>
-                            <span id="soLuong">2</span>
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </div>
-                        <div class="col-3">
-                            <span id="Price">$1000</span>
-                        </div>
-                        <div class="col-1">
-                            <i class="fa-solid fa-trash"></i>
-                        </div>
-                    </li> -->
-                </ul>
-            </div>
-            <div class="tb_cart">
-                <p id="tbCart">Looks Like You Haven't Added Any Product In The Cart</p>
-            </div>
-            <div class="pay_price">
-                <span>Total: </span>
-                <div class="d-flex">
-                    <button class="btn">Purchase <i class="fa-solid fa-credit-card text-primary"></i></button>
-                    <button class="btn">Clear Cart <i class="fa-solid fa-trash text-danger"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div id="orderNow">
+    
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+    integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
-        integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./src/models/cart.js"></script>
-    <script src="./src/models/listProduct.js"></script>
-    <script src="./src/models/product.js"></script>
-    <script src="./src/services/index.js"></script>
-    <script src="./src/controllers/main.js"></script>
+  <!-- <script src="./src/models/cartList.js"></script> -->
+  <script src="./src/models/cartItem.js"></script>
+  <script src="./src/models/listProduct.js"></script>
+  <script src="./src/models/product.js"></script>
+  <script src="./src/services/index.js"></script>
+  <script src="./src/controllers/main.js"></script>
 </body>
 
 </html>
