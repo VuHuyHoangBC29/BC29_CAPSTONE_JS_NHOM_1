@@ -51,9 +51,9 @@ const renderProduct = (data) => {
                         <div class="product_info">
                             <ul>
                                 <li>Screen: ${item.screen.slice(
-      7,
-      8
-    )}.${item.screen.slice(8, 9)} inch</li>
+                                  7,
+                                  8
+                                )}.${item.screen.slice(8, 9)} inch</li>
                                 <li>Back camera: ${item.backCamera}</li>
                                 <li>Front camera: ${item.frontCamera}</li>
                                 <li>${item.desc}</li>
@@ -61,8 +61,9 @@ const renderProduct = (data) => {
                         </div>
                         <div class="product_price d-flex justify-content-between align-items-center">
                             <span>${item.price} VNĐ</span>
-                            <button class="btn" onclick="ThemSP('${item.id
-      }')">Add <i
+                            <button class="btn" onclick="ThemSP('${
+                              item.id
+                            }')">Add <i
                                     class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
@@ -111,26 +112,31 @@ const renderListCart = (data) => {
     content += `
             <li class="row d-flex align-items-center">
                 <div class="col-3">
-                    <img class="item_Img" src="${item.img
-      }" style="width: 30%;" alt="">
+                    <img class="item_Img" src="${
+                      item.img
+                    }" style="width: 30%;" alt="">
                 </div>
                 <div class="col-4">
                     <span class="col-4">${item.name}</span>
                 </div>
                 <div class="col-2 icon">
-                    <button onclick="giamSL('${item.id
-      }')"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="giamSL('${
+                      item.id
+                    }')"><i class="fa-solid fa-chevron-left"></i></button>
                     <span class="so_luong">${item.quantity}</span>
-                    <button onclick="tangSL('${item.id
-      }')"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button onclick="tangSL('${
+                      item.id
+                    }')"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
                 <div class="col-2">
-                    <span class="totalItemPrice">${item.price * item.quantity
-      }</span><span> VNĐ</span>
+                    <span class="totalItemPrice">${
+                      item.price * item.quantity
+                    }</span><span> VNĐ</span>
                 </div>
                 <div class="col-1">
-                    <button onclick="removeCartItem('${item.id
-      }')"><i class="fa-solid fa-trash"></i></button>
+                    <button onclick="removeCartItem('${
+                      item.id
+                    }')"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </li>
          `;
@@ -162,8 +168,8 @@ const renderListCart = (data) => {
   //   getEle("totalPrice").innerHTML = totalPrice + " VNĐ";
   // });
   cartList.forEach((item) => {
-    totalPrice += item.price*item.quantity;
-  })
+    totalPrice += item.price * item.quantity;
+  });
 
   getEle("totalPrice").innerHTML = totalPrice + " VNĐ";
 };
@@ -204,9 +210,9 @@ const tangSL = (id) => {
 const giamSL = (id) => {
   cartList.forEach((item) => {
     if (item.id === id) {
-      if(item.quantity === 1){
+      if (item.quantity === 1) {
         removeCartItem(item.id);
-      }else{
+      } else {
         item.quantity--;
       }
     }
@@ -236,19 +242,19 @@ getEle("selectPhone").onchange = function () {
 };
 
 getEle("btnPurchase").onclick = () => {
-  if(cartList.length > 0){
+  if (cartList.length > 0) {
     getEle("orderNow").style.display = "block";
-  renderOrtherPopup(cartList);
-  getEle("cart").style.display = "none";
+    renderOrtherPopup(cartList);
+    getEle("cart").style.display = "none";
   }
 };
 
 //btn Clear
-getEle("btnClear").onclick = () =>{
+getEle("btnClear").onclick = () => {
   cartList = [];
   renderListCart(cartList);
   setLocalStorage(cartList);
-}
+};
 
 //render Order_po-pup
 const renderOrtherPopup = (data) => {
@@ -261,14 +267,14 @@ const renderOrtherPopup = (data) => {
     total += `
                       <div class="d-flex justify-content-between">
                         <span>${ele.quantity} x ${ele.name}</span>
-                        <span>${ele.quantity*ele.price} VND</span>
+                        <span>${ele.quantity * ele.price} VND</span>
                       </div>
                       </br>
             `;
     return total;
   }, "");
 
-  content +=`
+  content += `
                     </div>
                     <hr class="bg-light">
                     <p>payment</p>
@@ -282,16 +288,16 @@ const renderOrtherPopup = (data) => {
                     </div>
                   </div>
                 </div>
-  `
+  `;
   getEle("orderNow").innerHTML = content;
-}
+};
 
-const btnCancleOrder = () =>{
+const btnCancleOrder = () => {
   getEle("cart").style.display = "block";
   getEle("orderNow").style.display = "none";
-}
+};
 
-const btnOderNow = () =>{
+const btnOderNow = () => {
   const random = Math.floor(Math.random() * 1000);
   const content = `
   <div class="d-flex flex-column">
@@ -301,23 +307,23 @@ const btnOderNow = () =>{
     <p>You can pay ${totalPrice} VND by card or any online transaction method after the products have been dilivered to you</p>
     <button onclick="btnOk()" class="btn btn-info form-control">Okay</button>
   </div>
-  `
+  `;
   getEle("orderNowContent").innerHTML = content;
-  getEle("orderNowContent").className= "placed";
-}
+  getEle("orderNowContent").className = "placed";
+};
 
-const btnOk =() =>{
+const btnOk = () => {
   const content = `
   <h2>Thanks for shopping with us</h2>
   <button onclick="btnContinue()" class="btn btn-info form-control">continue</button>
-  `
+  `;
   getEle("orderNowContent").innerHTML = content;
-  getEle("orderNowContent").className= "continue";
+  getEle("orderNowContent").className = "continue";
   cartList = [];
   renderListCart(cartList);
   setLocalStorage(cartList);
-}
+};
 
-const btnContinue = () =>{
+const btnContinue = () => {
   getEle("orderNow").style.display = "none";
-}
+};
