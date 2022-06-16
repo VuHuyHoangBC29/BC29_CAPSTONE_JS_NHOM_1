@@ -38,7 +38,7 @@ const renderProduct = (data) => {
                 <div class="icon d-flex justify-content-between p-3">${icon}</i>
                     <span>In Stock</span>
                 </div>
-                <img class="card-img-top mx-auto mt-4 mb-5"
+                <img class="card-img-top mx-auto"
                     src="${item.img}"
                     alt="Card image" style="width:70%">
                 <div class="card-body">
@@ -116,7 +116,7 @@ const renderListCart = (data) => {
                     }" style="width: 30%;" alt="">
                 </div>
                 <div class="col-4">
-                    <span class="col-4">${item.name}</span>
+                    <span class="col-4">${item.ten}</span>
                 </div>
                 <div class="col-2 icon">
                     <button id="btnDecreaseQuan" onclick="giamSL('${
@@ -232,4 +232,5 @@ getEle("selectPhone").onchange = function () {
 getEle("btnPurchase").onclick = () => {
   cartList = [];
   renderListCart(cartList);
+  setLocalStorage(cartList);
 };

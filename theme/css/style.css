@@ -22,7 +22,6 @@ body {
 
 #cardList .card_item .card {
   border-radius: 30px;
-  overflow: hidden;
   background-color: black;
 }
 
@@ -35,10 +34,14 @@ body {
   color: green;
 }
 
+#cardList .card_item .card .card-img-top {
+  margin: 2rem 0;
+}
+
 #cardList .card_item .card .card-body {
   background-color: #2e2f33;
   color: white;
-  border-radius: 20px;
+  border-radius: 30px;
   margin-top: 10px;
 }
 
@@ -46,6 +49,11 @@ body {
   display: none;
   -webkit-transition: all 1s;
   transition: all 1s;
+}
+
+#cardList .card_item .card .card-body button {
+  border: 1px solid white;
+  border-radius: 30px;
 }
 
 #cardList .card_item:hover {
