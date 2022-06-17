@@ -15,6 +15,8 @@ const getListProduct = () => {
     .then(function (result) {
       dataApi = result.data;
       renderProduct(result.data);
+      getLocalStorage();
+
     })
 
     .catch(function (error) {
@@ -33,6 +35,7 @@ const renderProduct = (data) => {
     } else {
       icon = `<span class="text-light">Samsung</span>`;
     }
+
     content += `
         <div class="card_item col-3">
             <div class="card">
@@ -51,9 +54,9 @@ const renderProduct = (data) => {
                         <div class="product_info">
                             <ul>
                                 <li>Screen: ${item.screen.slice(
-                                  7,
-                                  8
-                                )}.${item.screen.slice(8, 9)} inch</li>
+      7,
+      8
+    )}.${item.screen.slice(8, 9)} inch</li>
                                 <li>Back camera: ${item.backCamera}</li>
                                 <li>Front camera: ${item.frontCamera}</li>
                                 <li>${item.desc}</li>
@@ -61,10 +64,12 @@ const renderProduct = (data) => {
                         </div>
                         <div class="product_price d-flex justify-content-between align-items-center">
                             <span>${item.price} VNĐ</span>
-                            <button class="btn" onclick="ThemSP('${
-                              item.id
-                            }')">Add <i
-                                    class="fa-solid fa-chevron-right"></i></button>
+                            <div id = "up_down-${item.id}"  style="display: none">
+                              <button onclick="giamSL('${item.id}')"><i class="fa-solid fa-chevron-left"></i></button>
+                              <span id="soLuong-${item.id}">1</span>
+                              <button onclick="tangSL('${item.id}')"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                              <button id="btn-${item.id}" class="btn btn_up_down" onclick="ThemSP('${item.id}')">Add <i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -72,6 +77,9 @@ const renderProduct = (data) => {
         </div>
         `;
   });
+
+
+
   getEle("card_product").innerHTML = content;
 };
 
@@ -99,47 +107,54 @@ const ThemSP = (id) => {
     cartItem = getCartItem(id);
     cartItem.quantity = 1;
     cartList.push(cartItem);
+    getEle(`up_down-${id}`).style.display = "block";
+    getEle(`btn-${id}`).style.display = "none";
   }
 
+
+
+  console.log(index);
   renderListCart(cartList);
 
   setLocalStorage(cartList);
+
 };
 
 const renderListCart = (data) => {
   let content = "";
-  data.forEach((item) => {
+  data.forEach((item, idx) => {
     content += `
             <li class="row d-flex align-items-center">
                 <div class="col-3">
-                    <img class="item_Img" src="${
-                      item.img
-                    }" style="width: 30%;" alt="">
+                    <img class="item_Img" src="${item.img
+      }" style="width: 30%;" alt="">
                 </div>
                 <div class="col-4">
                     <span class="col-4">${item.name}</span>
                 </div>
                 <div class="col-2 icon">
-                    <button onclick="giamSL('${
-                      item.id
-                    }')"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="giamSL('${item.id
+      }')"><i class="fa-solid fa-chevron-left"></i></button>
                     <span class="so_luong">${item.quantity}</span>
-                    <button onclick="tangSL('${
-                      item.id
-                    }')"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button onclick="tangSL('${item.id
+      }')"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
                 <div class="col-2">
-                    <span class="totalItemPrice">${
-                      item.price * item.quantity
-                    }</span><span> VNĐ</span>
+                    <span class="totalItemPrice">${item.price * item.quantity
+      }</span><span> VNĐ</span>
                 </div>
                 <div class="col-1">
-                    <button onclick="removeCartItem('${
-                      item.id
-                    }')"><i class="fa-solid fa-trash"></i></button>
+                    <button onclick="removeCartItem('${item.id
+      }')"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </li>
          `;
+    if (item.quantity > 0) {
+      getEle(`up_down-${item.id}`).style.display = "block";
+      getEle(`btn-${item.id}`).style.display = "none";
+      getEle(`soLuong-${item.id}`).innerHTML = item.quantity;
+    }
+
   });
   getEle("listCart").innerHTML = content;
   console.log(data);
@@ -156,17 +171,7 @@ const renderListCart = (data) => {
   }
 
   totalPrice = 0;
-  // let priceArr = document.querySelectorAll(".totalItemPrice");
-  // console.log(priceArr);
-  // priceArr.forEach((item) => {
-  //   if (item) {
-  //     let priceArrItemPrice = item.innerHTML * 1;
-  //     totalPrice += priceArrItemPrice;
-  //   } else {
-  //     totalPrice = 0;
-  //   }
-  //   getEle("totalPrice").innerHTML = totalPrice + " VNĐ";
-  // });
+
   cartList.forEach((item) => {
     totalPrice += item.price * item.quantity;
   });
@@ -188,23 +193,27 @@ const getLocalStorage = () => {
   renderListCart(cartList);
 };
 
-getLocalStorage();
+
 
 getEle("shopping").onclick = function () {
   getEle("cart").style.display = "block";
+  getEle("blur").style.display = "block";
 };
 
 getEle("close").onclick = function () {
   getEle("cart").style.display = "none";
+  getEle("blur").style.display = "none";
 };
 
 const tangSL = (id) => {
   cartList.forEach((item) => {
     if (item.id === id) {
       item.quantity++;
+      getEle(`soLuong-${id}`).innerHTML = item.quantity;
     }
   });
   renderListCart(cartList);
+  setLocalStorage(cartList);
 };
 
 const giamSL = (id) => {
@@ -212,12 +221,16 @@ const giamSL = (id) => {
     if (item.id === id) {
       if (item.quantity === 1) {
         removeCartItem(item.id);
+        getEle(`up_down-${id}`).style.display = "none";
+        getEle(`btn-${id}`).style.display = "block";
       } else {
         item.quantity--;
       }
+      getEle(`soLuong-${id}`).innerHTML = item.quantity;
     }
   });
   renderListCart(cartList);
+  setLocalStorage(cartList);
 };
 
 const removeCartItem = (id) => {
@@ -251,6 +264,12 @@ getEle("btnPurchase").onclick = () => {
 
 //btn Clear
 getEle("btnClear").onclick = () => {
+  cartList.forEach((ele) => {
+    getEle(`up_down-${ele.id}`).style.display = "none";
+    getEle(`btn-${ele.id}`).style.display = "block";
+    getEle(`soLuong-${ele.id}`).innerHTML = "1";
+  })
+
   cartList = [];
   renderListCart(cartList);
   setLocalStorage(cartList);
@@ -319,6 +338,11 @@ const btnOk = () => {
   `;
   getEle("orderNowContent").innerHTML = content;
   getEle("orderNowContent").className = "continue";
+  cartList.forEach((ele) => {
+    getEle(`up_down-${ele.id}`).style.display = "none";
+    getEle(`btn-${ele.id}`).style.display = "block";
+    getEle(`soLuong-${ele.id}`).innerHTML = "1";
+  })
   cartList = [];
   renderListCart(cartList);
   setLocalStorage(cartList);
@@ -326,4 +350,5 @@ const btnOk = () => {
 
 const btnContinue = () => {
   getEle("orderNow").style.display = "none";
+  getEle("blur").style.display = "none";
 };
