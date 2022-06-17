@@ -156,7 +156,10 @@ body {
 
 #cart .cart_content {
   position: fixed;
+  top: 0;
+  right: 0;
   height: 100vh;
+  width: 60%;
   padding: 30px;
   background-color: black;
 }
