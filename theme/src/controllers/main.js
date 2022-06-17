@@ -16,7 +16,6 @@ const getListProduct = () => {
       dataApi = result.data;
       renderProduct(result.data);
       getLocalStorage();
-
     })
 
     .catch(function (error) {
@@ -37,7 +36,7 @@ const renderProduct = (data) => {
     }
 
     content += `
-        <div class="card_item col-3">
+        <div class="card_item col-sm-12 col-md-6 col-lg-4 col-xl-3">
             <div class="card">
                 <div class="icon d-flex justify-content-between p-3">${icon}</i>
                     <span>In Stock</span>
@@ -54,9 +53,9 @@ const renderProduct = (data) => {
                         <div class="product_info">
                             <ul>
                                 <li>Screen: ${item.screen.slice(
-      7,
-      8
-    )}.${item.screen.slice(8, 9)} inch</li>
+                                  7,
+                                  8
+                                )}.${item.screen.slice(8, 9)} inch</li>
                                 <li>Back camera: ${item.backCamera}</li>
                                 <li>Front camera: ${item.frontCamera}</li>
                                 <li>${item.desc}</li>
@@ -64,12 +63,22 @@ const renderProduct = (data) => {
                         </div>
                         <div class="product_price d-flex justify-content-between align-items-center">
                             <span>${item.price} VNĐ</span>
-                            <div id = "up_down-${item.id}"  style="display: none">
-                              <button onclick="giamSL('${item.id}')"><i class="fa-solid fa-chevron-left"></i></button>
+                            <div id = "up_down-${
+                              item.id
+                            }"  style="display: none">
+                              <button onclick="giamSL('${
+                                item.id
+                              }')"><i class="fa-solid fa-chevron-left"></i></button>
                               <span id="soLuong-${item.id}">1</span>
-                              <button onclick="tangSL('${item.id}')"><i class="fa-solid fa-chevron-right"></i></button>
+                              <button onclick="tangSL('${
+                                item.id
+                              }')"><i class="fa-solid fa-chevron-right"></i></button>
                             </div>
-                              <button id="btn-${item.id}" class="btn btn_up_down" onclick="ThemSP('${item.id}')">Add <i class="fa-solid fa-chevron-right"></i></button>
+                              <button id="btn-${
+                                item.id
+                              }" class="btn btn_up_down" onclick="ThemSP('${
+      item.id
+    }')">Add <i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -77,8 +86,6 @@ const renderProduct = (data) => {
         </div>
         `;
   });
-
-
 
   getEle("card_product").innerHTML = content;
 };
@@ -111,13 +118,10 @@ const ThemSP = (id) => {
     getEle(`btn-${id}`).style.display = "none";
   }
 
-
-
   console.log(index);
   renderListCart(cartList);
 
   setLocalStorage(cartList);
-
 };
 
 const renderListCart = (data) => {
@@ -125,27 +129,32 @@ const renderListCart = (data) => {
   data.forEach((item, idx) => {
     content += `
             <li class="row d-flex align-items-center">
-                <div class="col-3">
-                    <img class="item_Img" src="${item.img
-      }" style="width: 30%;" alt="">
+                <div class="col-md-1 col-lg-3">
+                    <img class="item_Img" src="${
+                      item.img
+                    }" style="width: 30%;" alt="">
                 </div>
-                <div class="col-4">
+                <div class="col-md-3 col-lg-2">
                     <span class="col-4">${item.name}</span>
                 </div>
-                <div class="col-2 icon">
-                    <button onclick="giamSL('${item.id
-      }')"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="col-md-4 col-lg-3 icon">
+                    <button onclick="giamSL('${
+                      item.id
+                    }')"><i class="fa-solid fa-chevron-left"></i></button>
                     <span class="so_luong">${item.quantity}</span>
-                    <button onclick="tangSL('${item.id
-      }')"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button onclick="tangSL('${
+                      item.id
+                    }')"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-                <div class="col-2">
-                    <span class="totalItemPrice">${item.price * item.quantity
-      }</span><span> VNĐ</span>
+                <div class="col-md-3 col-lg-3">
+                    <span class="totalItemPrice">${
+                      item.price * item.quantity
+                    }</span><span> VNĐ</span>
                 </div>
-                <div class="col-1">
-                    <button onclick="removeCartItem('${item.id
-      }')"><i class="fa-solid fa-trash"></i></button>
+                <div class="col-md-1 col-lg-1">
+                    <button onclick="removeCartItem('${
+                      item.id
+                    }')"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </li>
          `;
@@ -154,7 +163,6 @@ const renderListCart = (data) => {
       getEle(`btn-${item.id}`).style.display = "none";
       getEle(`soLuong-${item.id}`).innerHTML = item.quantity;
     }
-
   });
   getEle("listCart").innerHTML = content;
   console.log(data);
@@ -192,8 +200,6 @@ const getLocalStorage = () => {
 
   renderListCart(cartList);
 };
-
-
 
 getEle("shopping").onclick = function () {
   getEle("cart").style.display = "block";
@@ -268,7 +274,7 @@ getEle("btnClear").onclick = () => {
     getEle(`up_down-${ele.id}`).style.display = "none";
     getEle(`btn-${ele.id}`).style.display = "block";
     getEle(`soLuong-${ele.id}`).innerHTML = "1";
-  })
+  });
 
   cartList = [];
   renderListCart(cartList);
@@ -342,7 +348,7 @@ const btnOk = () => {
     getEle(`up_down-${ele.id}`).style.display = "none";
     getEle(`btn-${ele.id}`).style.display = "block";
     getEle(`soLuong-${ele.id}`).innerHTML = "1";
-  })
+  });
   cartList = [];
   renderListCart(cartList);
   setLocalStorage(cartList);

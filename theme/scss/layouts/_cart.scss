@@ -31,10 +31,10 @@
         }
 
         &:hover {
-            i {
-                background-color: white;
-                color: black;
-            }
+          i {
+            background-color: white;
+            color: black;
+          }
         }
       }
     }
@@ -71,6 +71,15 @@
       text-align: center;
       font-size: 50px;
       color: gray;
+
+      @media screen and (max-width: 1199px) {
+        font-size: 40px;
+      }
+
+      
+      @media screen and (max-width: 1199px) {
+        font-size: 30px;
+      }
     }
 
     .pay_price {
@@ -93,3 +102,24 @@
     }
   }
 }
+
+// //Responsive
+// @media screen and (max-width: 1199px) {
+//   #cart {
+//     .cart_content {
+//       .tb_cart {
+//         font-size: 40px;
+//       }
+//     }
+//   }
+// }
+
+// @media screen and (max-width: 991px) {
+//   #cart {
+//     .cart_content {
+//       .tb_cart {
+//         font-size: 30px;
+//       }
+//     }
+//   }
+// }
