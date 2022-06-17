@@ -129,10 +129,10 @@ const renderListCart = (data) => {
   data.forEach((item, idx) => {
     content += `
             <li class="row d-flex align-items-center">
-                <div class="col-md-1 col-lg-3">
-                    <img class="item_Img" src="${
+                <div class="col-md-1 col-lg-3 imgThumb">
+                    <img class="item_Img img-fluid" src="${
                       item.img
-                    }" style="width: 30%;" alt="">
+                    }" style="" alt="">
                 </div>
                 <div class="col-md-3 col-lg-2">
                     <span class="col-4">${item.name}</span>
