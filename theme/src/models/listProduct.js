@@ -1,5 +1,0 @@
-class ListProduct{
-    list = [];
-
-    
-}

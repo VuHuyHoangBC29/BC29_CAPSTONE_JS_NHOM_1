@@ -1,5 +1,5 @@
 let services = new Services();
-let listProduct = new ListProduct();
+// let listProduct = new ListProduct();
 let dataApi = [];
 // const cartList = new CartList();
 let cartList = [];
@@ -129,15 +129,15 @@ const renderListCart = (data) => {
   data.forEach((item, idx) => {
     content += `
             <li class="row d-flex align-items-center">
-                <div class="col-md-1 col-lg-3 imgThumb">
-                    <img class="item_Img img-fluid" src="${
+                <div class="col-sm-1 col-md-1 col-lg-3 imgThumb">
+                    <img class="item_Img" src="${
                       item.img
-                    }" style="" alt="">
+                    }" alt="">
                 </div>
-                <div class="col-md-3 col-lg-2">
+                <div class="col-sm-11 col-md-11 col-lg-2 cartItemName">
                     <span class="col-4">${item.name}</span>
                 </div>
-                <div class="col-md-4 col-lg-3 icon">
+                <div class="col-sm-4 col-md-4 col-lg-3 cartItemControl">
                     <button onclick="giamSL('${
                       item.id
                     }')"><i class="fa-solid fa-chevron-left"></i></button>
@@ -146,12 +146,12 @@ const renderListCart = (data) => {
                       item.id
                     }')"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-                <div class="col-md-3 col-lg-3">
+                <div class="col-sm-6 col-md-6 col-lg-3 cartItemQuan">
                     <span class="totalItemPrice">${
                       item.price * item.quantity
                     }</span><span> VNĐ</span>
                 </div>
-                <div class="col-md-1 col-lg-1">
+                <div class="col-sm-2 col-md-2 col-lg-1 cartItemRemove">
                     <button onclick="removeCartItem('${
                       item.id
                     }')"><i class="fa-solid fa-trash"></i></button>
