@@ -1,8 +1,6 @@
 let services = new Services();
-// let listProduct = new ListProduct();
 let dataApi = [];
-// const cartList = new CartList();
-let cartList = [];
+const service = new CartList();
 let totalPrice = 0;
 
 const getEle = (id) => {
@@ -92,10 +90,33 @@ const renderProduct = (data) => {
 
 const getCartItem = (id) => {
   let cartItem = {};
-
   dataApi.forEach((item) => {
     if (item.id === id) {
-      cartItem = item;
+      const id = item.id;
+      const name = item.name;
+      const price = item.price;
+      const screen = item.screen;
+      const backCam = item.backCam;
+      const frontCam = item.frontCam;
+      const img = item.img;
+      const desc = item.desc;
+      const type = item.type;
+      const quantity = 0;
+
+      cartItem = new CartItem(
+        id,
+        name,
+        price,
+        screen,
+        backCam,
+        frontCam,
+        img,
+        desc,
+        type,
+        quantity
+      );
+
+      console.log(cartItem);
     }
   });
   return cartItem;
@@ -103,7 +124,7 @@ const getCartItem = (id) => {
 
 const ThemSP = (id) => {
   let index = -1;
-  cartList.forEach((ele, idx) => {
+  service.cartList.forEach((ele, idx) => {
     if (ele.id === id) {
       index = idx;
       ele.quantity++;
@@ -113,15 +134,15 @@ const ThemSP = (id) => {
   if (index === -1) {
     cartItem = getCartItem(id);
     cartItem.quantity = 1;
-    cartList.push(cartItem);
+    service.cartList.push(cartItem);
     getEle(`up_down-${id}`).style.display = "block";
     getEle(`btn-${id}`).style.display = "none";
   }
 
   console.log(index);
-  renderListCart(cartList);
+  renderListCart(service.cartList);
 
-  setLocalStorage(cartList);
+  setLocalStorage(service.cartList);
 };
 
 const renderListCart = (data) => {
@@ -129,12 +150,10 @@ const renderListCart = (data) => {
   data.forEach((item, idx) => {
     content += `
             <li class="row d-flex align-items-center">
-                <div class="col-sm-1 col-md-1 col-lg-3 imgThumb">
-                    <img class="item_Img" src="${
-                      item.img
-                    }" alt="">
+                <div class="col-sm-1 col-md-1 col-lg-2 imgThumb">
+                    <img class="item_Img" src="${item.img}" alt="">
                 </div>
-                <div class="col-sm-11 col-md-11 col-lg-2 cartItemName">
+                <div class="col-sm-11 col-md-11 col-lg-3 cartItemName">
                     <span class="col-4">${item.name}</span>
                 </div>
                 <div class="col-sm-4 col-md-4 col-lg-3 cartItemControl">
@@ -168,7 +187,7 @@ const renderListCart = (data) => {
   console.log(data);
 
   let totalItem = 0;
-  cartList.forEach((item, i) => {
+  service.cartList.forEach((item, i) => {
     totalItem += item.quantity;
   });
   getEle("counter").innerHTML = totalItem;
@@ -180,7 +199,7 @@ const renderListCart = (data) => {
 
   totalPrice = 0;
 
-  cartList.forEach((item) => {
+  service.cartList.forEach((item) => {
     totalPrice += item.price * item.quantity;
   });
 
@@ -188,7 +207,7 @@ const renderListCart = (data) => {
 };
 
 const setLocalStorage = () => {
-  const dataString = JSON.stringify(cartList);
+  const dataString = JSON.stringify(service.cartList);
   localStorage.setItem("CART_LIST", dataString);
 };
 
@@ -196,9 +215,9 @@ const getLocalStorage = () => {
   const stringify = localStorage.getItem("CART_LIST");
   console.log(stringify);
   cartList = stringify ? JSON.parse(stringify) : [];
-  console.log(cartList);
+  console.log(service.cartList);
 
-  renderListCart(cartList);
+  renderListCart(service.cartList);
 };
 
 getEle("shopping").onclick = function () {
@@ -212,18 +231,18 @@ getEle("close").onclick = function () {
 };
 
 const tangSL = (id) => {
-  cartList.forEach((item) => {
+  service.cartList.forEach((item) => {
     if (item.id === id) {
       item.quantity++;
       getEle(`soLuong-${id}`).innerHTML = item.quantity;
     }
   });
-  renderListCart(cartList);
-  setLocalStorage(cartList);
+  renderListCart(service.cartList);
+  setLocalStorage(service.cartList);
 };
 
 const giamSL = (id) => {
-  cartList.forEach((item) => {
+  service.cartList.forEach((item) => {
     if (item.id === id) {
       if (item.quantity === 1) {
         removeCartItem(item.id);
@@ -235,14 +254,14 @@ const giamSL = (id) => {
       getEle(`soLuong-${id}`).innerHTML = item.quantity;
     }
   });
-  renderListCart(cartList);
-  setLocalStorage(cartList);
+  renderListCart(service.cartList);
+  setLocalStorage(service.cartList);
 };
 
 const removeCartItem = (id) => {
-  cartList = cartList.filter((ele) => ele.id !== id);
-  renderListCart(cartList);
-  setLocalStorage(cartList);
+  service.removeCartItem(id);
+  renderListCart(service.cartList);
+  setLocalStorage(service.cartList);
 };
 
 getEle("selectPhone").onchange = function () {
@@ -261,24 +280,24 @@ getEle("selectPhone").onchange = function () {
 };
 
 getEle("btnPurchase").onclick = () => {
-  if (cartList.length > 0) {
+  if (service.cartList.length > 0) {
     getEle("orderNow").style.display = "block";
-    renderOrtherPopup(cartList);
+    renderOrtherPopup(service.cartList);
     getEle("cart").style.display = "none";
   }
 };
 
 //btn Clear
 getEle("btnClear").onclick = () => {
-  cartList.forEach((ele) => {
+  service.cartList.forEach((ele) => {
     getEle(`up_down-${ele.id}`).style.display = "none";
     getEle(`btn-${ele.id}`).style.display = "block";
     getEle(`soLuong-${ele.id}`).innerHTML = "1";
   });
 
-  cartList = [];
-  renderListCart(cartList);
-  setLocalStorage(cartList);
+  service.cartList = [];
+  renderListCart(service.cartList);
+  setLocalStorage(service.cartList);
 };
 
 //render Order_po-pup
@@ -344,14 +363,14 @@ const btnOk = () => {
   `;
   getEle("orderNowContent").innerHTML = content;
   getEle("orderNowContent").className = "continue";
-  cartList.forEach((ele) => {
+  service.cartList.forEach((ele) => {
     getEle(`up_down-${ele.id}`).style.display = "none";
     getEle(`btn-${ele.id}`).style.display = "block";
     getEle(`soLuong-${ele.id}`).innerHTML = "1";
   });
-  cartList = [];
-  renderListCart(cartList);
-  setLocalStorage(cartList);
+  service.cartList = [];
+  renderListCart(service.cartList);
+  setLocalStorage(service.cartList);
 };
 
 const btnContinue = () => {
