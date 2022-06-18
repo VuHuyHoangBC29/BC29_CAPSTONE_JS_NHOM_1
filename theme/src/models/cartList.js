@@ -1,7 +1,11 @@
 class CartList {
-    cardList = [];
+  cartList = [];
 
-    addCartItem(cartItem) {
-        this.cardList = [...this.cardList, cartItem];
-    }
+  addCartItem(cartItem) {
+    this.cartList = [...this.cartList, cartItem];
+  }
+
+  removeCartItem(id) {
+    this.cartList = this.cartList.filter((ele) => ele.id !== id);
+  }
 }
