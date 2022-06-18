@@ -214,7 +214,7 @@ const setLocalStorage = () => {
 const getLocalStorage = () => {
   const stringify = localStorage.getItem("CART_LIST");
   console.log(stringify);
-  cartList = stringify ? JSON.parse(stringify) : [];
+  service.cartList = stringify ? JSON.parse(stringify) : [];
   console.log(service.cartList);
 
   renderListCart(service.cartList);
