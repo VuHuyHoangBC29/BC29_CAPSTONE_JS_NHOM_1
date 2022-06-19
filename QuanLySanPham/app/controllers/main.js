@@ -30,6 +30,9 @@ function renderProductList(data) {
         <tr>
                 <td>${index + 1}</td>
                 <td>${product.name}</td>
+                <td>
+                <img src="${product.img}" style="width:40%">
+                </td>
                 <td>${product.price}</td>
                 <td>${product.screen}</td>
                 <td>${product.backCamera}</td>
